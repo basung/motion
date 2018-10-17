@@ -1,0 +1,220 @@
+.bannerWrapper {
+      // margin-top: -64px;
+      background: #35aef8;
+      background: -moz-linear-gradient(-45deg, #35aef8 0%, #7681ff 76%, #7681ff 76%);
+      background: -webkit-linear-gradient(-45deg, #35aef8 0%, #7681ff 76%, #7681ff 76%);
+      background: linear-gradient(135deg, #35aef8 0%, #7681ff 76%, #7681ff 76%);
+      position: relative;
+}
+
+.bannerWrapper .bannerBgCenter {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+}
+
+.bannerWrapper .banner {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 24px;
+      margin: auto;
+      height: 100vh;
+}
+
+.bannerWrapper .bannerText {
+      width: 50%;
+      height: 700px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 1;
+      text-align: center;
+}
+
+.bannerText h1 {
+      font-size: 48px;
+      font-weight: lighter;
+      color: #fff;
+}
+
+.bannerText h3 {
+      font-weight: lighter;
+      color: #fff;
+}
+
+.bannerText p {
+      margin: 16px 0 40px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #fff;
+}
+
+.bannerText .bannerTextButtonLeft {
+      width: 113px;
+      height: 39px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 14px;
+      border: 1px solid #fff; // transition: background .45s @ease-out, box-shadow .45s @ease-out;
+      color: #fff;
+      display: inline-block; // .template {
+}
+
+.bannerText .bannerTextButtonLeft i {
+      width: 16px;
+      margin-left: 7px;
+      background: url(https://zos.alipayobjects.com/rmsportal/IlXQOcjKCQNSbPdDamWL.svg) center no-repeat;
+      background-size: contain;
+      filter: brightness(1);
+      height: 16px;
+      display: inline-block;
+      vertical-align: sub;
+      text-transform: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1; // transition: filter .45s @ease-out;
+}
+
+.bannerText .bannerTextButtonRight {
+      margin-left: 10px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 14px;
+      border: 1px solid #fff; // transition: background .45s @ease-out, box-shadow .45s @ease-out;
+      color: #fff;
+      display: inline-block; // .template {
+}
+
+.bannerText .bannerTextButtonRight i {
+      width: 16px;
+      margin-left: 7px;
+      background: url(https://zos.alipayobjects.com/rmsportal/dgqoflLasHqTmNM.svg) center no-repeat;
+      background-size: contain;
+      filter: brightness(1);
+      height: 16px;
+      display: inline-block;
+      vertical-align: sub;
+      text-transform: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1; // transition: filter .45s @ease-out;
+}
+
+.bannerText a:hover {
+      background: fade(#fff, 15);
+      box-shadow: 0 0px 6px fade(#fff, 35);
+}
+
+.bannerWrapper .banner .bannerDemo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+}
+
+.logoDemo {
+      width: 100%;
+      height: 100%;
+      position: relative;
+}
+
+.logoDemo .rightSide {
+      width: 300px;
+      height: 400px;
+      position: absolute;
+      right: 60px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+}
+
+.logoDemo .rightSide * {
+      pointer-events: none;
+}
+
+.logoDemo .rightSide path {
+      stroke: #fff;
+      stroke-width: 50px;
+      stroke-linecap: round;
+      fill: none;
+}
+
+.logoDemo .pointWrapper {
+      position: absolute;
+}
+
+.logoDemo .point {
+      border-radius: 100%;
+}
+
+
+
+///
+
+
+@import '~antd/lib/style/themes/default.less';
+.container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: auto;
+      background: @layout-body-background;
+      background-color: white;
+}
+
+.content {
+      padding: 32px 0;
+      flex: 1;
+}
+
+@media (min-width: @screen-md-min) {
+      .container {
+            background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+            background-repeat: no-repeat;
+            background-position: center 110px;
+            background-size: 100%;
+      }
+      .content {
+            padding: 112px 0 24px 0;
+      }
+}
+
+.top {
+      text-align: center;
+}
+
+.header {
+      height: 44px;
+      line-height: 44px;
+      a {
+            text-decoration: none;
+      }
+}
+
+.logo {
+      height: 44px;
+      vertical-align: top;
+      margin-right: 16px;
+}
+
+.title {
+      font-size: 33px;
+      color: #fff;
+      font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      position: relative;
+      top: 2px;
+}
+
+.desc {
+      font-size: @font-size-base;
+      color: #fff;
+      margin-top: 14px;
+      margin-bottom: 40px;
+}
