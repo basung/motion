@@ -67,21 +67,14 @@ const cachedSave = (response, hashcode) => {
  */
 export default function request(url, options = { expirys: isAntdPro(), }, NETENV) {
 
-	console.info('NETENV ===',NETENV)
 	//判断是服务端接口还是mock接口
 	if (NETENV === true) {
 		url = Api_Config.APIURL + url;
 	}
-	// console.info('url ===', url)
-
+	
 	//从lacalStorage中获取Authorization
 	let Authorization = localStorage.getItem('Authorization')
-	console.info('Authorization ===111===', Authorization )
-	if((Authorization != null) && (Authorization != undefined) && (Authorization.length > 1)){
-		Authorization = Authorization.replace("\"","").replace("\"","");
-	}
-	console.info('Authorization ===222===', Authorization )
-
+	
 	const defaultOptions = { credentials: 'include' };
 	const newOptions = { ...defaultOptions, ...options };
 
@@ -100,9 +93,6 @@ export default function request(url, options = { expirys: isAntdPro(), }, NETENV
 		};
 		// newOptions.body = JSON.stringify(newOptions.body);
 	}
-
-	// console.info("url===========", url);
-	// console.info("newOptions===========", newOptions);
 	
 	return fetch(url, newOptions)
 		.then(checkStatus)

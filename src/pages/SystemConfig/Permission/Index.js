@@ -30,7 +30,7 @@ export default class Index extends PureComponent {
             this.state.sorter = pagination ? sorter : {}
             const { dispatch } = this.props;
             const params = {
-                  pageIndex: this.state.pagination.current-1,
+                  pageIndex: this.state.pagination.current - 1,
                   pageSize: this.state.pagination.pageSize,
                   sort: this.state.sorter.field,
                   ...this.state.filtersArg,
@@ -67,7 +67,7 @@ export default class Index extends PureComponent {
                   },
                   onDeleteItem(id) {
                         const params = {
-                              pageIndex: data.pagination.current-1,
+                              pageIndex: data.pagination.current - 1,
                               pageSize: data.pagination.pageSize,
                               sort: sorter.field,
                               ...filtersArg,
@@ -86,7 +86,7 @@ export default class Index extends PureComponent {
                   visible: modalVisible,
                   onOk(item) {
                         const params = {
-                              pageIndex: data.pagination.current-1,
+                              pageIndex: data.pagination.current - 1,
                               pageSize: data.pagination.pageSize,
                               sort: sorter.field,
                               ...filtersArg,
@@ -108,14 +108,12 @@ export default class Index extends PureComponent {
             return (
                   <PageHeaderWrapper>
                         <Card bordered={false} className={Styles.card}>
-                              <div className={Styles.tableList}>
-                                    <List
-                                          loading={loading}
-                                          data={data}
-                                          onChange={this.handleTableChange}
-                                          {...listProps}
-                                    />
-                              </div>
+                              <List
+                                    loading={loading}
+                                    data={data}
+                                    onChange={this.handleTableChange}
+                                    {...listProps}
+                              />
                         </Card>
                         <ModalGen />
                   </PageHeaderWrapper>

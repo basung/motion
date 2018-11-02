@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Button } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import BraftEditor from '@/components/OnSelfBraftEditor';
+import { IMGUPURL, IMGURL } from '@/utils/api_evn'
 
 
 export default class Index extends PureComponent {
@@ -20,6 +21,8 @@ export default class Index extends PureComponent {
             const braftEditorProps = {
                   defaultValue: ('<p>这是一个<b>BraftEditor组件!!!!</b></p><div class="media-wrap image-wrap align-center" style="text-align:center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1539316389&di=4da2c9fb6e90cecdb1b515b5a471bc8c&src=http://img3.duitang.com/uploads/item/201608/05/20160805231205_CuWSk.jpeg" width="250px" height="250px" style="width:250px;height:250px"/></div>'),
                   onGetContent: this.onGetContent,
+                  IMGUPURL : IMGUPURL,   //图片上传地址
+                  IMGURL : IMGURL  //图片显示地址
             }
 
             return (

@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { Table, Modal, Button, Badge, Divider } from 'antd';
 import moment from 'moment';
 import { isEmpty } from '@/utils/utils'
+import { IMGURL } from '@/utils/api_evn'
 import Styles from './Index.less';
 const confirm = Modal.confirm
 
@@ -64,7 +65,7 @@ class StandardTable extends PureComponent {
                   {
                         title: '头像',
                         dataIndex: 'avatar',
-                        render: (text) => text ? <img height={45} src={text} style={{ borderRadius: '50%' }} /> : <div style={{ height: '45px' }}></div>,
+                        render: (text) => text ? <img height={45} src={IMGURL + text} style={{ borderRadius: '50%' }} /> : <div style={{ height: '45px' }}></div>,
                         align: 'center',
                   },
                   {

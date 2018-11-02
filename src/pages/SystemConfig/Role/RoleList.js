@@ -18,9 +18,9 @@ export default class Index extends PureComponent {
       componentDidMount() {
             const { dispatch, role: { data } } = this.props;
             console.info('data ===', JSON.stringify(data))
-            if((!isEmpty(data) && !isEmpty(data.pagination) && data.pagination.current > 0)){
+            if ((!isEmpty(data) && !isEmpty(data.pagination) && data.pagination.current > 0)) {
                   const params = {
-                        pageIndex: data.pagination.current-1,
+                        pageIndex: data.pagination.current - 1,
                         pageSize: data.pagination.pageSize,
                         // sort: data.pagination.sorter.field,
                         // ...this.state.filtersArg,
@@ -29,7 +29,7 @@ export default class Index extends PureComponent {
                         type: 'role/query',
                         payload: { ...params },
                   });
-            }else{
+            } else {
                   dispatch({
                         type: 'role/query',
                         payload: { ... this.state.pagination },
@@ -127,14 +127,12 @@ export default class Index extends PureComponent {
 
             return (
                   <Card bordered={false} className={Styles.card}>
-                        <div className={Styles.tableList}>
-                              <List
-                                    loading={loading}
-                                    data={data}
-                                    onChange={this.handleTableChange}
-                                    {...listProps}
-                              />
-                        </div>
+                        <List
+                              loading={loading}
+                              data={data}
+                              onChange={this.handleTableChange}
+                              {...listProps}
+                        />
                         <ModalGen />
                   </Card>
             );

@@ -113,8 +113,32 @@ export default {
 	'menu.account.logout': '退出登录',
 
 	/**
-	 * 自定义菜单国际化
+	 * 自定义菜单国际化 start
 	 */
+
+	//商品管理
+	'menu.wares': '商品管理',
+	'menu.wares.goods': '商品管理',
+	'menu.wares.goods.list': '商品列表',
+	'menu.wares.goods.create': '商品添加',
+	'menu.wares.goods.edit': '商品编辑',
+
+	//商品配置
+	'menu.waresConfig': '商品配置',
+	'menu.waresConfig.brand': '商品品牌',
+	'menu.waresConfig.tags': '商品标签',
+	'menu.waresConfig.category': '商品分类',
+	'menu.waresConfig.spec': '商品规格',
+	'menu.waresConfig.spec.list': '商品规格列表',
+	'menu.waresConfig.spec.edit': '商品规格编辑',
+
+
+	//新闻模块
+	'menu.news': '文章管理',
+	'menu.news.category': '文章分类',
+	'menu.news.article': '文章管理',
+	'menu.news.article.list': '文章列表管理',
+	'menu.news.article.edit': '文章编辑管理',
 
 	//自定义组件
 	'menu.component': '自定义组件',
@@ -132,6 +156,11 @@ export default {
 	'menu.system.role.roleList': '角色列表',
 	'menu.system.role.relationPermission': '角色关联权限',
 	'menu.system.permission': '系统权限',
+
+	/**
+	 * 自定义菜单国际化 end
+	 */
+
 
 
 	'app.login.message-invalid-credentials': '账户或密码错误（admin/888888）',

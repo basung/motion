@@ -52,7 +52,7 @@ class modal extends React.Component {
 				<Form>
 					<FormItem label="权限父节点:"   {...formItemLayout}>
 						{getFieldDecorator('parentCode', {
-							initialValue: (type === 'create') ? parentCodeUndefine : item.parentCode ,
+							initialValue: (type === 'create') ? parentCodeUndefine : item.parentId ,
 						})(
 							<Select placeholder="请选择权限父节点"
 								showSearch

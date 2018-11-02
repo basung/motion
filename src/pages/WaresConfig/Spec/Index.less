@@ -1,0 +1,35 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~@/utils/utils.less';
+.editableCard {
+      width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      :global {
+            .ant-card-body {
+                  padding: 0px 0px;
+            }
+      }
+}
+
+.editable {
+      :global {
+            .ant-table-tbody>tr>td {
+                  padding: 5px 0px;
+                  word-break: break-word;
+                  -ms-word-break: break-all;
+            }
+      }
+}
+
+
+@media screen and (max-width: @screen-lg) {
+      .tableListForm :global(.ant-form-item) {
+            margin-right: 24px;
+      }
+}
+
+@media screen and (max-width: @screen-md) {
+      .tableListForm :global(.ant-form-item) {
+            margin-right: 8px;
+      }
+}

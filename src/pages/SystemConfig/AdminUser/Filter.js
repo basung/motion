@@ -29,7 +29,9 @@ class Filter extends React.Component {
 
       render() {
 
-            const { data, roleData, form: { getFieldDecorator }   } = this.props;
+            const { data: { pagination, filters }, roleData, form: { getFieldDecorator }   } = this.props;
+
+            console.info('pagination ===', pagination)
 
             //角色数据
 		const roleList = [];
@@ -42,32 +44,44 @@ class Filter extends React.Component {
             return (
                   <Form onSubmit={this.handleSearch} layout="inline">
                         <FormItem>
-                              {getFieldDecorator('loginName')(
+                              {getFieldDecorator('loginName',{
+                                    initialValue: pagination.loginName,
+                              })(
                                     <Input placeholder="请输入用户登录名" style={{ width: '200px', marginBottom: '10px' }} />
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('trueName')(
+                              {getFieldDecorator('trueName',{
+                                    initialValue: pagination.trueName,
+                              })(
                                     <Input placeholder="请输入用户真实名" style={{ width: '200px', marginBottom: '10px' }} />
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('mobile')(
+                              {getFieldDecorator('mobile',{
+                                    initialValue: pagination.mobile,
+                              })(
                                     <Input placeholder="请输入用户手机" style={{ width: '200px', marginBottom: '10px' }} />
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('telephone')(
+                              {getFieldDecorator('telephone',{
+                                    initialValue: pagination.telephone,
+                              })(
                                     <Input placeholder="请输入用户电话" style={{ width: '200px', marginBottom: '10px' }} />
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('email')(
+                              {getFieldDecorator('email',{
+                                    initialValue: pagination.email,
+                              })(
                                     <Input placeholder="请输入用户邮箱" style={{ width: '200px', marginBottom: '10px' }} />
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('sex')(
+                              {getFieldDecorator('sex',{
+                                    initialValue: pagination.sex,
+                              })(
                                     <Select placeholder="请选择性别" style={{ width: '200px', marginBottom: '10px' }}>
                                           <Option value={1} >男</Option>
                                           <Option value={0} >女</Option>
@@ -75,14 +89,18 @@ class Filter extends React.Component {
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('roleId')(
+                              {getFieldDecorator('roleId',{
+                                    initialValue: pagination.roleId,
+                              })(
                                     <Select placeholder="请选择关联角色" style={{ width: '200px', marginBottom: '10px' }}>
                                           {roleList}
                                     </Select>
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('associatedType')(
+                              {getFieldDecorator('associatedType',{
+                                    initialValue: pagination.associatedType,
+                              })(
                                     <Select placeholder="请选择账号类型" style={{ width: '200px', marginBottom: '10px' }}>
                                           <Option value="superAdmin">平台管理员</Option>
                                           <Option value="tenant">租户</Option>
@@ -93,7 +111,9 @@ class Filter extends React.Component {
                               )}
                         </FormItem>
                         <FormItem>
-                              {getFieldDecorator('isActive')(
+                              {getFieldDecorator('isActive',{
+                                    initialValue: pagination.isActive,
+                              })(
                                     <Select placeholder="请选择账号状态" style={{ width: '200px', marginBottom: '10px' }}>
                                           <Option value={0} >已禁用</Option>
                                           <Option value={1} >已启用</Option>

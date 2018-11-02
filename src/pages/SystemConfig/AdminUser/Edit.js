@@ -1,11 +1,13 @@
 import React from 'react'
 import router from 'umi/router';
-import { Form, Input, Radio, Card, Select, Button, DatePicker, Upload, Icon, message } from 'antd'
+import { Form, Input, Radio, Card, Select, Button, DatePicker, Upload, Icon } from 'antd'
 import { connect } from 'dva';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { getBase64, beforeUpload } from '@/utils/fileUtils';
 import { isEmpty } from '@/utils/utils';
+import { IMGUPURL, IMGURL } from '@/utils/api_evn'
+import { getLocalStorageEnhance } from '@/utils/localStorageUtils'
 import Styles from './Index.less';
 const Option = Select.Option;
 const FormItem = Form.Item
@@ -54,22 +56,32 @@ export default class Index extends React.Component {
 		}
 		if (info.file.status === 'done') {
 			// Get this url from response in real world.
-			getBase64(info.file.originFileObj, imageUrl => this.setState({
-				imageUrl: 'http://img.hb.aicdn.com/2f9d06d3572334f6061b77b0895efbc4706ff948690ea-93MzbL_fw658',
-				uploading: false,
-			}));
+			// getBase64(info.file.originFileObj, imageUrl => this.setState({
+			// 	imageUrl: 'http://img.hb.aicdn.com/2f9d06d3572334f6061b77b0895efbc4706ff948690ea-93MzbL_fw658',
+			// 	uploading: false,
+			// },()=>{
+			// 	console.info('info.file ====', JSON.stringify(info.file))
+			// }));
+			let response = info.file ? info.file.response : false
+			if (response && response.status == 200) {
+				this.setState({ imageUrl: response.data.filePath, uploading: false }, () => {
+
+				})
+			}
 		}
 	}
 
 	handleSubmit = e => {
-		const { adminUser:{ currentItem, modalType }, dispatch, form } = this.props;
+		const { adminUser: { currentItem, modalType, roleData }, dispatch, form } = this.props;
 		e.preventDefault();
 		form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
-
 				values.version = currentItem.version
-				values.avatar = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1926735935,2699436958&fm=26&gp=0.jpg'
-				// console.info('values ===', JSON.stringify(values))
+				values.avatar = this.state.imageUrl
+				let roleItem = roleData.filter(item => item.id == values.roleId)
+				if (!isEmpty(roleItem) && roleItem.length > 0) {
+					values.roleName = roleItem[0].name
+				}
 				dispatch({
 					type: `adminUser/${modalType}`,
 					payload: values,
@@ -82,8 +94,6 @@ export default class Index extends React.Component {
 	render() {
 
 		const { adminUser: { data, roleData, currentItem, modalType }, dispatch, loading, form: { getFieldDecorator, getFieldValue } } = this.props;
-
-		// console.info('this.props ===', JSON.stringify(this.props))
 
 		//角色数据
 		const roleList = [];
@@ -100,17 +110,15 @@ export default class Index extends React.Component {
 				<div className="ant-upload-text">上传</div>
 			</div>
 		);
-		const imageUrl = this.state.imageUrl;
+		const { imageUrl } = this.state;
 
 		function onCancel() {
 			router.push('/system/adminUser/adminUserList')
-            }
+		}
 
 		return (
 			<Card bordered={false} className={Styles.card}>
-
-
-				<Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
+				<Form onSubmit={this.handleSubmit} style={{ marginTop: 8 }}>
 					<FormItem label="账号关联角色:"   {...formItemLayout}>
 						{getFieldDecorator('roleId', {
 							initialValue: (modalType === 'create') ? '' : currentItem.roleId,
@@ -129,7 +137,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem label="账号类型:"   {...formItemLayout}>
 						{getFieldDecorator('associatedType', {
-							initialValue: currentItem.associatedType,
+							initialValue: (modalType === 'create') ? '' : currentItem.associatedType,
 							rules: [
 								{
 									required: true,
@@ -148,7 +156,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="登录账号" >
 						{getFieldDecorator('loginName', {
-							initialValue: currentItem.loginName,
+							initialValue: (modalType === 'create') ? '' : currentItem.loginName,
 							rules: [
 								{
 									required: true,
@@ -159,7 +167,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="登录密码" >
 						{getFieldDecorator('password', {
-							initialValue: currentItem.password,
+							initialValue: (modalType === 'create') ? '' : currentItem.password,
 							rules: [
 								{
 									required: true,
@@ -170,7 +178,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="真实姓名" >
 						{getFieldDecorator('trueName', {
-							initialValue: currentItem.trueName,
+							initialValue: (modalType === 'create') ? '' : currentItem.trueName,
 							rules: [
 								{
 									required: false,
@@ -181,7 +189,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="手机号" >
 						{getFieldDecorator('mobile', {
-							initialValue: currentItem.mobile,
+							initialValue: (modalType === 'create') ? '' : currentItem.mobile,
 							rules: [
 								{
 									required: true,
@@ -192,7 +200,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="电话" >
 						{getFieldDecorator('telephone', {
-							initialValue: currentItem.telephone,
+							initialValue: (modalType === 'create') ? '' : currentItem.telephone,
 							rules: [
 								{
 									required: false,
@@ -203,7 +211,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="邮箱" >
 						{getFieldDecorator('email', {
-							initialValue: currentItem.email,
+							initialValue: (modalType === 'create') ? '' : currentItem.email,
 							rules: [
 								{
 									required: false,
@@ -214,7 +222,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="出生日期" >
 						{getFieldDecorator('birthday', {
-							initialValue: (modalType === 'update' ? moment(moment(currentItem.birthday).format('YYYY-MM-DD HH:mm:ss'), dateFormat) : moment(new Date(), dateFormat)),
+							initialValue: (modalType === 'create' ? moment(new Date(), dateFormat) : moment(moment(currentItem.birthday).format('YYYY-MM-DD HH:mm:ss'), dateFormat) ),
 							rules: [
 								{
 									required: false,
@@ -225,7 +233,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="性别" >
 						{getFieldDecorator('sex', {
-							initialValue: currentItem.sex,
+							initialValue: (modalType === 'create') ? '' : currentItem.sex,
 							rules: [
 								{
 									required: false,
@@ -241,7 +249,7 @@ export default class Index extends React.Component {
 					</FormItem>
 					<FormItem {...formItemLayout} label="用户头像" >
 						{getFieldDecorator('avatar', {
-							initialValue: currentItem.avatar,
+							initialValue: (modalType === 'create') ? '' : currentItem.avatar,
 							rules: [
 								{
 									required: false,
@@ -250,15 +258,18 @@ export default class Index extends React.Component {
 							],
 						})(
 							<Upload
-								name="avatar"
+								name="uploadFile"
 								listType="picture-card"
 								className="avatar-uploader"
+								headers={{ Authorization: getLocalStorageEnhance('Authorization') }}
 								showUploadList={false}
-								action="//jsonplaceholder.typicode.com/posts/"
+								action={IMGUPURL}
 								beforeUpload={beforeUpload}
 								onChange={this.handleChange}
 							>
-								{imageUrl ? <img src={imageUrl} alt="avatar" width={'102px'} height={'102px'} /> : uploadButton}
+								{imageUrl ?
+									<img src={IMGURL + imageUrl} alt="avatar" width={'102px'} height={'102px'} /> :
+									(modalType === 'create') ? uploadButton : <img src={IMGURL + currentItem.avatar} alt="avatar" width={'102px'} height={'102px'} />}
 							</Upload>
 						)}
 					</FormItem>

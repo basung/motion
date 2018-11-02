@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import BraftEditor, { EditorState } from 'braft-editor'
 // 引入编辑器样式
 import 'braft-editor/dist/index.css'
+import { getLocalStorageEnhance } from '@/utils/localStorageUtils'
 
 
 export default class Index extends PureComponent {
@@ -35,6 +36,14 @@ export default class Index extends PureComponent {
             // })
 
             this.props.onGetContent(this)
+
+      }
+
+      componentWillUpdate( nextProps,  nextState ){
+
+            if(nextProps.defaultValue != this.props.defaultValue){
+                  this.setState({ editorState : EditorState.createFrom(nextProps.defaultValue)})
+            }
 
       }
 
@@ -118,11 +127,9 @@ export default class Index extends PureComponent {
             `
       }
 
-
-
       render() {
 
-            const { defaultValue } = this.props
+            const { defaultValue, IMGUPURL, IMGURL, width } = this.props
 
             const { editorState } = this.state
 
@@ -168,23 +175,37 @@ export default class Index extends PureComponent {
             ]
 
             const myUploadFn = (param) => {
-                  const serverURL = 'http://upload-server'
+                  const serverURL = IMGUPURL
+                  // const serverURL = 'http://upload-server'
                   const xhr = new XMLHttpRequest
                   const fd = new FormData()
                   const successFn = (response) => {
                         // 假设服务端直接返回文件上传后的地址
                         // 上传成功后调用param.success并传入上传后的文件地址
+                        // IMGURL + xhr.responseText.response.data.filePath
+                        let responseJSON = JSON.parse(xhr.response)
+                        console.info('xhr.response ===', responseJSON)
+                        let imageUrl = ''
+                        if (responseJSON.status == 200) {
+                              console.info('ture')
+                              imageUrl = IMGURL + responseJSON.data.filePath
+                        } else {
+                              console.info('false')
+                              imageUrl = ''
+                        }
+                        console.info('imageUrl ===', imageUrl)
                         param.success({
-                              url: xhr.responseText,
-                              meta: {
-                                    id: 'xxx',
-                                    title: 'xxx',
-                                    alt: 'xxx',
-                                    loop: true, // 指定音视频是否循环播放
-                                    autoPlay: true, // 指定音视频是否自动播放
-                                    controls: true, // 指定音视频是否显示控制栏
-                                    poster: 'http://xxx/xx.png', // 指定视频播放器的封面
-                              }
+                              // url: xhr.responseText,
+                              url: imageUrl,
+                              // meta: {
+                              //       id: 'xxx',
+                              //       title: 'xxx',
+                              //       alt: 'xxx',
+                              //       loop: true, // 指定音视频是否循环播放
+                              //       autoPlay: true, // 指定音视频是否自动播放
+                              //       controls: true, // 指定音视频是否显示控制栏
+                              //       poster: 'http://xxx/xx.png', // 指定视频播放器的封面
+                              // }
                         })
                   }
                   const progressFn = (event) => {
@@ -202,12 +223,17 @@ export default class Index extends PureComponent {
                   xhr.addEventListener("load", successFn, false)
                   xhr.addEventListener("error", errorFn, false)
                   xhr.addEventListener("abort", errorFn, false)
-                  fd.append('file', param.file)
+                  fd.append('uploadFile', param.file)
                   xhr.open('POST', serverURL, true)
+                  xhr.setRequestHeader("Authorization", getLocalStorageEnhance("Authorization"));
                   xhr.send(fd)
             }
             //媒体文件配置
             const media = {
+                  image: true, // 开启图片插入功能
+                  video: false, // 开启视频插入功能
+                  audio: false, // 开启音频插入功能
+                  validateFn: null, // 指定本地校验函数，说明见下文
                   uploadFn: myUploadFn,
             }
             const editorProps = {
@@ -219,13 +245,12 @@ export default class Index extends PureComponent {
                   controls: controls,
                   lineHeights: [0, 1, 1.2, 1.5, 1.75, 2, 2.5, 3, 4],
                   extendControls: extendControls,  //指定自定义的控件，目前支持button、dropdown、modal和component这四种类型
-                  // media: media,
-                  ref:'htmlContent',
-
+                  media: media,
+                  ref: 'htmlContent',
             }
             return (
 
-                  <BraftEditor {...editorProps} style={{ textAlain: 'center', background: 'aliceblue', width: 1000, border: "solid 1px #00000040", borderRadius: '5px', boxShadow: "0 10px 20px #ffffff" }} />
+                  <BraftEditor {...editorProps} style={{ textAlain: 'center', background: 'aliceblue', width: width ? width : 1000 , border: "solid 1px #00000040", borderRadius: '5px', boxShadow: "0 10px 20px #ffffff" }} />
 
             );
       }

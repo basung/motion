@@ -292,6 +292,149 @@ export default [
 					},
 				],
 			},
+
+			/**
+			 * 商品管理模块
+			 */
+			{
+				name: 'wares',
+				icon: 'shopping',
+				path: 'wares',
+				routes: [
+					//商品
+					{
+						path: '/wares/goods',
+						name: 'goods',
+						component: './Wares/Goods',
+						hideChildrenInMenu: true,
+						routes: [
+							{
+								path: '/wares/goods',
+								name: 'goods',
+								redirect: '/wares/goods/list',
+							},
+							// 商品列表
+							{
+								path: '/wares/goods/list',
+								name: 'list',
+								component: './Wares/Goods/Main',
+							},
+							// 商品添加
+							{
+								path: '/wares/goods/create',
+								name: 'create',
+								component: './Wares/Goods/Create',
+							},
+							// 商品编辑
+							{
+								path: '/wares/goods/edit/:id',
+								name: 'edit',
+								component: './Wares/Goods/Edit',
+							},
+						]
+					},
+				]
+			},
+
+
+			/**
+			 * 商品配置模块
+			 */
+			{
+				name: 'waresConfig',
+				icon: 'deployment-unit',
+				path: 'waresConfig',
+				routes: [
+					//商品规格
+					{
+						path: '/waresConfig/spec',
+						name: 'spec',
+						component: './WaresConfig/Spec',
+						hideChildrenInMenu: true,
+						routes: [
+							{
+								path: '/waresConfig/spec',
+								name: 'spec',
+								redirect: '/waresConfig/spec/list',
+							},
+							// 商品规格列表
+							{
+								path: '/waresConfig/spec/list',
+								name: 'list',
+								component: './WaresConfig/Spec/Main',
+							},
+							// 商品规格编辑
+							{
+								path: '/waresConfig/spec/edit/:id',
+								name: 'edit',
+								component: './WaresConfig/Spec/Edit',
+							},
+						]
+					},
+					//商品分类
+					{
+						path: '/waresConfig/category',
+						name: 'category',
+						component: './WaresConfig/Category',
+					},
+					//商品品牌
+					{
+						path: '/waresConfig/brand',
+						name: 'brand',
+						component: './WaresConfig/Brand',
+					},
+					//商品标签
+					{
+						path: '/waresConfig/tags',
+						name: 'tags',
+						component: './WaresConfig/Tags',
+					},
+				]
+			},
+
+			/**
+			 * 咨询关联模块
+			 */
+			{
+				name: 'news',
+				icon: 'book',
+				path: '/news',
+				routes: [
+					// 咨询分类模块
+					{
+						path: '/news/category',
+						name: 'category',
+						component: './News/Category',
+					},
+					// 咨询详情
+					{
+						path: '/news/article',
+						name: 'article',
+						component: './News/Article',
+						hideChildrenInMenu: true,
+						routes: [
+							{
+								path: '/news/article',
+								name: 'adminUser',
+								redirect: '/news/article/list',
+							},
+							// 咨询详情列表
+							{
+								path: '/news/article/list',
+								name: 'list',
+								component: './News/Article/Main',
+							},
+							// 咨询详情编辑
+							{
+								path: '/news/article/edit/:id',
+								name: 'edit',
+								component: './News/Article/Edit',
+							},
+						]
+					},
+				],
+			},
+
 			/**
 			 * 系统配置模块
 			 */

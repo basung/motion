@@ -25,11 +25,13 @@ export default class Index extends PureComponent {
       }
 
 
+
+
       componentWillReceiveProps(nextProps) {
 
             //判断数据源是否改变
             if (nextProps.role != this.props.role) {
-
+                  console.info('componentWillReceiveProps')
                   let permissionList = nextProps.role.permission
                   let rolePermissionList = nextProps.role.rolePermission
 
@@ -54,10 +56,10 @@ export default class Index extends PureComponent {
                   const tableData = []
                   if (!isEmpty(permissionList)) {
                         for (let i = 0; i < permissionList.length; i++) {
-                              if (permissionList[i].parentCode == '0') {
+                              if (permissionList[i].parentId == '0') {
                                     let tableCell = []
                                     for (let j = 0; j < permissionList.length; j++) {
-                                          if (permissionList[i].id == permissionList[j].parentCode) {
+                                          if (permissionList[i].id == permissionList[j].parentId) {
                                                 tableCell.push(
                                                       <Col key={permissionList[j].id} span={2}>
                                                             <Checkbox value={permissionList[j].id} defaultChecked={permissionList[j].checked} onChange={this.onChange}>
@@ -124,6 +126,9 @@ export default class Index extends PureComponent {
             // console.info('rolePermission ===', JSON.stringify(rolePermission))
 
             const { tableData, relationIds, roleId } = this.state
+
+            console.info('tableData ===', tableData)
+            console.info('relationIds ===', relationIds)
 
             function onSubmit() {
 

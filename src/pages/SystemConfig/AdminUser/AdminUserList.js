@@ -18,15 +18,13 @@ export default class Index extends PureComponent {
       componentDidMount() {
             const { dispatch, adminUser: { data } } = this.props;
             if ((!isEmpty(data) && !isEmpty(data.pagination) && data.pagination.current > 0)) {
-                  const params = {
-                        pageIndex: data.pagination.current - 1,
-                        pageSize: data.pagination.pageSize,
-                        // sort: data.pagination.sorter.field,
-                        // ...this.state.filtersArg,
-                  };
+                  let pagination = data.pagination
+                  pagination.pageIndex = pagination.current - 1
+                  delete pagination.current
+                  delete pagination.total
                   dispatch({
                         type: 'adminUser/query',
-                        payload: { ...params },
+                        payload: { ...pagination },
                   });
             } else {
                   dispatch({
@@ -118,21 +116,17 @@ export default class Index extends PureComponent {
 
             return (
                   <Card bordered={false} className={Styles.card}>
-                        <div className={Styles.tableList}>
-                              <div className={Styles.tableListForm}>
-                                    <Filter
-                                          onChange={this.handleTableChange}
-                                          data={data}
-                                          roleData={roleData}
-                                    />
-                              </div>
-                              <List
-                                    loading={loading}
-                                    data={data}
-                                    onChange={this.handleTableChange}
-                                    {...listProps}
-                              />
-                        </div>
+                        <Filter
+                              onChange={this.handleTableChange}
+                              data={data}
+                              roleData={roleData}
+                        />
+                        <List
+                              loading={loading}
+                              data={data}
+                              onChange={this.handleTableChange}
+                              {...listProps}
+                        />
                   </Card>
             );
       }

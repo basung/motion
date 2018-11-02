@@ -3,6 +3,64 @@ import React from 'react';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
 
+/**
+ * 对象判断是否为空
+ * @param   {mixed_var}     mixed_var    需要判断的对象
+ * @return  {Bool}   如为空,返回‘1’,否则返回‘0’.
+ */
+export function isEmpty(mixed_var) {
+	var key;
+
+	if (mixed_var === "" || mixed_var === "0" || mixed_var === null || mixed_var === false || typeof mixed_var === 'undefined') {
+		return true;
+	}
+
+	if (typeof mixed_var == 'object') {
+		for (key in mixed_var) {
+			return false;
+		}
+		return true;
+	}
+
+	return false;
+}
+
+
+/**
+ * 树状的算法
+ * @params list     代转化数组
+ * @params parentId 起始节点
+ */
+export function getTrees(list, parentId) {
+	let items = {};
+	// 获取每个节点的直属子节点，*记住是直属，不是所有子节点
+	for (let i = 0; i < list.length; i++) {
+		let key = list[i].parentId;
+		if (items[key]) {
+			items[key].push(list[i]);
+		} else {
+			items[key] = [];
+			items[key].push(list[i]);
+		}
+	}
+	return formatTree(items, parentId);
+}
+
+/**
+ * 利用递归格式化每个节点
+ */
+function formatTree(items, parentId) {
+	let result = [];
+	if (!items[parentId]) {
+		return result;
+	}
+	for (let t of items[parentId]) {
+		t.children = formatTree(items, t.id)
+		result.push(t);
+	}
+	return result;
+}
+
 export function fixedZero(val) {
 	return val * 1 < 10 ? `0${val}` : val;
 }
@@ -180,62 +238,4 @@ export function formatWan(val) {
 
 export function isAntdPro() {
 	return window.location.hostname === 'preview.pro.ant.design';
-}
-
-/**
- * 对象判断是否为空
- * @param   {mixed_var}     mixed_var    需要判断的对象
- * @return  {Bool}   如为空,返回‘1’,否则返回‘0’.
- */
-export function isEmpty(mixed_var) {
-	var key;
-
-	if (mixed_var === "" || mixed_var === "0" || mixed_var === null || mixed_var === false || typeof mixed_var === 'undefined') {
-		return true;
-	}
-
-	if (typeof mixed_var == 'object') {
-		for (key in mixed_var) {
-			return false;
-		}
-		return true;
-	}
-
-	return false;
-}
-
-
-/**
- * 树状的算法
- * @params list     代转化数组
- * @params parentId 起始节点
- */
-export function getTrees(list, parentId) {
-	let items = {};
-	// 获取每个节点的直属子节点，*记住是直属，不是所有子节点
-	for (let i = 0; i < list.length; i++) {
-		let key = list[i].parentCode;
-		if (items[key]) {
-			items[key].push(list[i]);
-		} else {
-			items[key] = [];
-			items[key].push(list[i]);
-		}
-	}
-	return formatTree(items, parentId);
-}
-
-/**
- * 利用递归格式化每个节点
- */
-function formatTree(items, parentId) {
-	let result = [];
-	if (!items[parentId]) {
-		return result;
-	}
-	for (let t of items[parentId]) {
-		t.children = formatTree(items, t.id)
-		result.push(t);
-	}
-	return result;
 }
