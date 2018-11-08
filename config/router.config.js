@@ -294,6 +294,49 @@ export default [
 			},
 
 			/**
+			 * 订单管理模块
+			 */
+			{
+				name: 'order',
+				icon: 'ordered-list',
+				path: 'order',
+				routes: [
+					//商品
+					{
+						path: '/order/orderManager',
+						name: 'orderManager',
+						component: './Order',
+						hideChildrenInMenu: true,
+						routes: [
+							{
+								path: '/order/orderManager',
+								name: 'orderManager',
+								redirect: '/order/orderManager/list',
+							},
+							// 商品列表
+							{
+								path: '/order/orderManager/list',
+								name: 'list',
+								component: './Order/Main',
+							},
+							// 商品添加
+							{
+								path: '/order/orderManager/create',
+								name: 'create',
+								component: './Order/Create',
+							},
+							// 商品编辑
+							// {
+							// 	path: '/order/orderManager/edit/:id',
+							// 	name: 'edit',
+							// 	component: './Wares/Goods/Edit',
+							// },
+						]
+					},
+				]
+			},
+
+			/**
 			 * 商品管理模块
 			 */
 			{
@@ -393,6 +436,29 @@ export default [
 			},
 
 			/**
+			 * 物流设置模块
+			 */
+			{
+				name: 'logistics',
+				icon: 'car',
+				path: '/logistics',
+				routes: [
+					// 物流公司
+					{
+						path: '/logistics/company',
+						name: 'company',
+						component: './Logistics/Company',
+					},
+					// 物流模版
+					{
+						path: '/logistics/carriage',
+						name: 'carriage',
+						component: './Logistics/Carriage',
+					},
+				],
+			},
+
+			/**
 			 * 咨询关联模块
 			 */
 			{
@@ -415,7 +481,7 @@ export default [
 						routes: [
 							{
 								path: '/news/article',
-								name: 'adminUser',
+								name: 'article',
 								redirect: '/news/article/list',
 							},
 							// 咨询详情列表
@@ -429,6 +495,43 @@ export default [
 								path: '/news/article/edit/:id',
 								name: 'edit',
 								component: './News/Article/Edit',
+							},
+						]
+					},
+				],
+			},
+
+			/**
+			 * 会员管理模块
+			 */
+			{
+				name: 'member',
+				icon: 'user',
+				path: '/member',
+				routes: [
+					// 会员信息
+					{
+						path: '/member/memberInfo',
+						name: 'memberInfo',
+						component: './Member/MemberInfo',
+						hideChildrenInMenu: true,
+						routes: [
+							{
+								path: '/member/memberInfo',
+								name: 'memberInfo',
+								redirect: '/member/memberInfo/list',
+							},
+							// 会员详情列表
+							{
+								path: '/member/memberInfo/list',
+								name: 'list',
+								component: './Member/MemberInfo/Main',
+							},
+							// 会员编辑
+							{
+								path: '/member/memberInfo/edit/:id',
+								name: 'edit',
+								component: './Member/MemberInfo/Edit/Index',
 							},
 						]
 					},

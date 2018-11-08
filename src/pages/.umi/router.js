@@ -397,6 +397,45 @@ let routes = [
         ]
       },
       {
+        "name": "order",
+        "icon": "ordered-list",
+        "path": "/order",
+        "routes": [
+          {
+            "path": "/order/orderManager",
+            "name": "orderManager",
+            "component": dynamic({ loader: () => import('../Order'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+            "hideChildrenInMenu": true,
+            "routes": [
+              {
+                "path": "/order/orderManager",
+                "name": "orderManager",
+                "redirect": "/order/orderManager/list",
+                "exact": true
+              },
+              {
+                "path": "/order/orderManager/list",
+                "name": "list",
+                "component": dynamic({ loader: () => import('../Order/Main'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+                "exact": true
+              },
+              {
+                "path": "/order/orderManager/create",
+                "name": "create",
+                "component": dynamic({ loader: () => import('../Order/Create'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+                "exact": true
+              },
+              {
+                "component": () => React.createElement(require('/Users/wangyang/github/Web/motion/node_modules/_umi-build-dev@1.1.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+              }
+            ]
+          },
+          {
+            "component": () => React.createElement(require('/Users/wangyang/github/Web/motion/node_modules/_umi-build-dev@1.1.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+          }
+        ]
+      },
+      {
         "name": "wares",
         "icon": "shopping",
         "path": "/wares",
@@ -499,6 +538,28 @@ let routes = [
         ]
       },
       {
+        "name": "logistics",
+        "icon": "car",
+        "path": "/logistics",
+        "routes": [
+          {
+            "path": "/logistics/company",
+            "name": "company",
+            "component": dynamic({ loader: () => import('../Logistics/Company'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+            "exact": true
+          },
+          {
+            "path": "/logistics/carriage",
+            "name": "carriage",
+            "component": dynamic({ loader: () => import('../Logistics/Carriage'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+            "exact": true
+          },
+          {
+            "component": () => React.createElement(require('/Users/wangyang/github/Web/motion/node_modules/_umi-build-dev@1.1.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+          }
+        ]
+      },
+      {
         "name": "news",
         "icon": "book",
         "path": "/news",
@@ -517,7 +578,7 @@ let routes = [
             "routes": [
               {
                 "path": "/news/article",
-                "name": "adminUser",
+                "name": "article",
                 "redirect": "/news/article/list",
                 "exact": true
               },
@@ -531,6 +592,45 @@ let routes = [
                 "path": "/news/article/edit/:id",
                 "name": "edit",
                 "component": dynamic({ loader: () => import('../News/Article/Edit'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+                "exact": true
+              },
+              {
+                "component": () => React.createElement(require('/Users/wangyang/github/Web/motion/node_modules/_umi-build-dev@1.1.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+              }
+            ]
+          },
+          {
+            "component": () => React.createElement(require('/Users/wangyang/github/Web/motion/node_modules/_umi-build-dev@1.1.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+          }
+        ]
+      },
+      {
+        "name": "member",
+        "icon": "user",
+        "path": "/member",
+        "routes": [
+          {
+            "path": "/member/memberInfo",
+            "name": "memberInfo",
+            "component": dynamic({ loader: () => import('../Member/MemberInfo'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+            "hideChildrenInMenu": true,
+            "routes": [
+              {
+                "path": "/member/memberInfo",
+                "name": "memberInfo",
+                "redirect": "/member/memberInfo/list",
+                "exact": true
+              },
+              {
+                "path": "/member/memberInfo/list",
+                "name": "list",
+                "component": dynamic({ loader: () => import('../Member/MemberInfo/Main'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
+                "exact": true
+              },
+              {
+                "path": "/member/memberInfo/edit/:id",
+                "name": "edit",
+                "component": dynamic({ loader: () => import('../Member/MemberInfo/Edit/Index'), loading: require('/Users/wangyang/github/Web/motion/src/components/PageLoading/index').default  }),
                 "exact": true
               },
               {

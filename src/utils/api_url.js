@@ -36,6 +36,16 @@ export const api_url = {
 
 
       /**
+       * 订单管理接口
+       */
+      api_order_order_query: '/order/order/query',
+      api_order_order_get: '/order/order/get',
+      api_order_order_remove: '/order/order/del',
+      api_order_order_update: '/order/order/update',
+      api_order_order_create: '/order/order/create',
+
+
+      /**
        * 商品管理接口
        */
       api_wares_goods_query: '/wares/goods/query',
@@ -43,6 +53,15 @@ export const api_url = {
       api_wares_goods_remove: '/wares/goods/del',
       api_wares_goods_update: '/wares/goods/update',
       api_wares_goods_create: '/wares/goods/create',
+
+      /**
+       * 商品SKU管理接口
+       */
+      api_wares_sku_query: '/wares/sku/query',
+      api_wares_sku_get: '/wares/sku/get',
+      api_wares_sku_remove: '/wares/sku/del',
+      api_wares_sku_update: '/wares/sku/update',
+      api_wares_sku_create: '/wares/sku/create',
 
       /**
        * 商品配置接口
@@ -78,6 +97,25 @@ export const api_url = {
 
 
       /**
+       * 物流设置接口
+       */
+
+       //物流公司
+       api_logistics_company_create: '/logistics/company/create',
+       api_logistics_company_query: '/logistics/company/query',
+       api_logistics_company_remove: '/logistics/company/del',
+       api_logistics_company_get: '/logistics/company/get',
+       api_logistics_company_update: '/logistics/company/update',
+
+       //物流模版
+       api_logistics_carriage_create: '/logistics/carriage/create',
+       api_logistics_carriage_query: '/logistics/carriage/query',
+       api_logistics_carriage_remove: '/logistics/carriage/del',
+       api_logistics_carriage_get: '/logistics/carriage/get',
+       api_logistics_carriage_update: '/logistics/carriage/update',
+
+
+      /**
        * 文章模块接口
        */
 
@@ -94,6 +132,26 @@ export const api_url = {
       api_article_news_get: '/article/news/get',
       api_article_news_update: '/article/news/update',
       api_article_news_remove: '/article/news/del',
+
+
+      /**
+       * 会员模块接口
+       */
+
+      //会员信息
+      api_member_memberInfo_query: '/member/memberInfo/query',
+      api_member_memberInfo_get: '/member/memberInfo/get',
+      api_member_memberInfo_create: '/member/memberInfo/create',
+      api_member_memberInfo_update: '/member/memberInfo/update',
+      api_member_memberInfo_remove: '/member/memberInfo/remove',
+      api_member_memberInfo_editPassword: '/member/memberInfo/editPassword',
+
+      //会员收获地址
+      api_member_memberAddress_query: '/member/memberAddress/query',
+      api_member_memberAddress_get: '/member/memberAddress/get',
+      api_member_memberAddress_create: '/member/memberAddress/create',
+      api_member_memberAddress_update: '/member/memberAddress/update',
+      api_member_memberAddress_remove: '/member/memberAddress/remove',
 
       /**
        * 系统配置模块接口

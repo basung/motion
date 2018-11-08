@@ -29,13 +29,17 @@ app.model({ namespace: 'rule', ...(require('/Users/wangyang/github/Web/motion/sr
 app.model({ namespace: 'profile', ...(require('/Users/wangyang/github/Web/motion/src/pages/Profile/models/profile.js').default) });
 app.model({ namespace: 'error', ...(require('/Users/wangyang/github/Web/motion/src/pages/Exception/models/error.js').default) });
 app.model({ namespace: 'geographic', ...(require('/Users/wangyang/github/Web/motion/src/pages/Account/Settings/models/geographic.js').default) });
+app.model({ namespace: 'order', ...(require('/Users/wangyang/github/Web/motion/src/pages/Order/models/order.js').default) });
 app.model({ namespace: 'goods', ...(require('/Users/wangyang/github/Web/motion/src/pages/Wares/Goods/models/goods.js').default) });
 app.model({ namespace: 'spec', ...(require('/Users/wangyang/github/Web/motion/src/pages/WaresConfig/Spec/models/spec.js').default) });
 app.model({ namespace: 'category', ...(require('/Users/wangyang/github/Web/motion/src/pages/WaresConfig/Category/models/category.js').default) });
 app.model({ namespace: 'brand', ...(require('/Users/wangyang/github/Web/motion/src/pages/WaresConfig/Brand/models/brand.js').default) });
 app.model({ namespace: 'tags', ...(require('/Users/wangyang/github/Web/motion/src/pages/WaresConfig/Tags/models/tags.js').default) });
+app.model({ namespace: 'company', ...(require('/Users/wangyang/github/Web/motion/src/pages/Logistics/Company/models/company.js').default) });
+app.model({ namespace: 'carriage', ...(require('/Users/wangyang/github/Web/motion/src/pages/Logistics/Carriage/models/carriage.js').default) });
 app.model({ namespace: 'newsCategory', ...(require('/Users/wangyang/github/Web/motion/src/pages/News/Category/models/newsCategory.js').default) });
 app.model({ namespace: 'article', ...(require('/Users/wangyang/github/Web/motion/src/pages/News/Article/models/article.js').default) });
+app.model({ namespace: 'memberInfo', ...(require('/Users/wangyang/github/Web/motion/src/pages/Member/MemberInfo/models/memberInfo.js').default) });
 app.model({ namespace: 'adminUser', ...(require('/Users/wangyang/github/Web/motion/src/pages/SystemConfig/AdminUser/models/adminUser.js').default) });
 app.model({ namespace: 'role', ...(require('/Users/wangyang/github/Web/motion/src/pages/SystemConfig/Role/models/role.js').default) });
 app.model({ namespace: 'permission', ...(require('/Users/wangyang/github/Web/motion/src/pages/SystemConfig/Permission/models/permission.js').default) });

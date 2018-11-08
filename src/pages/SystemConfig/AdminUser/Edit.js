@@ -4,7 +4,7 @@ import { Form, Input, Radio, Card, Select, Button, DatePicker, Upload, Icon } fr
 import { connect } from 'dva';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import { getBase64, beforeUpload } from '@/utils/fileUtils';
+import { beforeUpload } from '@/utils/fileUtils';
 import { isEmpty } from '@/utils/utils';
 import { IMGUPURL, IMGURL } from '@/utils/api_evn'
 import { getLocalStorageEnhance } from '@/utils/localStorageUtils'

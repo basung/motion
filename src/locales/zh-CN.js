@@ -74,7 +74,7 @@ export default {
 	'component.noticeIcon.empty': '暂无数据',
 
 
-
+	'menu': '首页',
 	'menu.home': '首页',
 	'menu.dashboard': 'Dashboard',
 	'menu.dashboard.analysis': '分析页',
@@ -116,6 +116,15 @@ export default {
 	 * 自定义菜单国际化 start
 	 */
 
+	//订单模块
+	'menu.order': '订单管理',
+	'menu.order.orderManager': '订单管理',
+	'menu.order.orderManager.list': '订单列表',
+	'menu.order.orderManager.create': '订单创建',
+	'menu.order.orderManager.edit': '订单编辑',
+	'menu.order.orderManager.detail': '订单详情',
+
+
 	//商品管理
 	'menu.wares': '商品管理',
 	'menu.wares.goods': '商品管理',
@@ -132,6 +141,11 @@ export default {
 	'menu.waresConfig.spec.list': '商品规格列表',
 	'menu.waresConfig.spec.edit': '商品规格编辑',
 
+	//物流模块
+	'menu.logistics': '物流管理',
+	'menu.logistics.company': '物流公司',
+	'menu.logistics.carriage': '运费模版',
+
 
 	//新闻模块
 	'menu.news': '文章管理',
@@ -139,6 +153,12 @@ export default {
 	'menu.news.article': '文章管理',
 	'menu.news.article.list': '文章列表管理',
 	'menu.news.article.edit': '文章编辑管理',
+
+	//会员模块
+	'menu.member': '会员管理',
+	'menu.member.memberInfo': '会员信息',
+	'menu.member.memberInfo.list': '会员信息',
+	'menu.member.memberInfo.edit': '会员设置',
 
 	//自定义组件
 	'menu.component': '自定义组件',

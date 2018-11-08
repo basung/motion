@@ -34,6 +34,25 @@ export async function query(params) {
       }
 }
 
+export async function query_all(params) {
+      let url = "";
+      if (params.url.indexOf('?') > 0) {
+            url = params.url + '&pageSize=100000&'
+      } else {
+            url = params.url + '?pageSize=100000&'
+      }
+
+      let paramStr = ''
+      if (params.params && !isEmptyObject(params.params) && !isEmpty(params.params)) {
+            for (let key in params.params) {
+                  if (!isEmpty(params.params[key])) {
+                        paramStr += key + '=' + params.params[key] + '&'
+                  }
+            }
+      }
+      return request(url + paramStr, { method: 'get' }, true)
+}
+
 export async function create(params) {
       let url = params.url
       let args = params.args
@@ -68,6 +87,15 @@ export async function getByIds(params) {
 
 export async function postByParams(params) {
       let url = params.url + params.args;
+      return request(url, {
+            method: 'POST',
+            body: params,
+      }, true);
+}
+
+//修改会员密码
+export async function editMemberPassword(params) {
+      let url = '/member/memberInfo/editPassword?id=' + params.id + '&password=' + params.password;
       return request(url, {
             method: 'POST',
             body: params,

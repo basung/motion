@@ -73,7 +73,6 @@ export default {
                         router.push('/news/article/edit/' + payload.id);
                   }
             },
-
             *getNewsById({ payload }, { call, put }) {
                   const response = yield call(getByIds, { url: api_url.api_article_news_get, id: payload.id });
                   if (checkStatus(response)) {
@@ -84,7 +83,6 @@ export default {
                         })
                   }
             },
-
             *getCategory({ payload }, { call, put }) {
                   const response = yield call(query, { url: api_url.api_article_category_query, params: { pageIndex: 0, pageSize: 10000 } });
                   if (checkStatus(response)) {

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input, Card, Select, Modal, Upload, Icon, TreeSelect, Row, Col, message } from 'antd'
-import isEqual from 'lodash/isEqual';
 import { isEmpty, getTrees } from '@/utils/utils';
 import { beforeUpload } from '@/utils/fileUtils';
 import { IMGUPURL, IMGURL } from '@/utils/api_evn'
@@ -31,47 +30,17 @@ export default class Index extends React.Component {
 		this.props.onGetStepOneContent(this)
 	}
 
-	//图片回显
-	static getDerivedStateFromProps(nextProps, preState) {
-		if (!isEqual(nextProps.currentItem, preState.newCurrentItem)) {
-			let { currentItem, modalType } = nextProps
-			let fileList = []
-			if (modalType === 'update' && !isEmpty(currentItem) && !isEmpty(currentItem.goodsImageList) && currentItem.goodsImageList.length > 0) {
-				let goodsImageList = currentItem.goodsImageList
-				for (let index = 0; index < goodsImageList.length; index++) {
-					let file = {};
-					file = {
-						uid: goodsImageList[index].id,
-						name: 'xxx.png',
-						status: 'done',
-						url: IMGURL + goodsImageList[index].imagePath,
-						path: goodsImageList[index].imagePath,
-					}
-					fileList.push(file);
-				}
-				return {
-					fileList: fileList,
-					newCurrentItem: currentItem,
-				};
-			} else {
-				return null
-			}
-		} else {
-			return null
-		}
-	}
-
 	getEditorContent = () => {
 
 		const { imageUrl, fileList } = this.state
-		const { brandData, tagsData, categoryData, currentItem } = this.props
+		const { brandData, tagsData, categoryData, } = this.props
 
 		let formData = {}
 		this.props.form.validateFieldsAndScroll((errors) => {
 			if (errors) {
-				formData = { errors: true }
+				formData = { errors : true }
 				message.error(' 请完善商品数据!!! ')
-				return
+				return 
 			}
 			const data = {
 				...this.props.form.getFieldsValue(),
@@ -109,7 +78,7 @@ export default class Index extends React.Component {
 			}
 
 			//商品主图
-			data.goodsDefaultImage = imageUrl ? imageUrl : currentItem.goodsDefaultImage
+			data.goodsDefaultImage = imageUrl
 			//图片列表数据
 			// console.info('fileList ==商品基础信息==', JSON.stringify(fileList))
 			const goodsImageList = [];
@@ -124,10 +93,6 @@ export default class Index extends React.Component {
 			}
 			data.goodsImageList = goodsImageList
 			// console.info('data ==商品基础信息==', JSON.stringify(data))
-
-			data.version = currentItem.version
-			data.tenantId = currentItem.tenantId
-			data.creator = currentItem.creator
 			formData = data
 		})
 		return formData
