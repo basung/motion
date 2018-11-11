@@ -68,7 +68,7 @@ class StandardTable extends PureComponent {
                   {
                         title: '分类名称',
                         dataIndex: 'categoryName',
-                        align: 'center',
+                        align: 'left',
                   },
                   {
                         title: '分类图片',

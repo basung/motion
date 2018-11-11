@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 import { Table, Modal, Button, Badge, Divider, Popover } from 'antd';
-import { isEmpty, getTrees } from '@/utils/utils'
+import { isJSON } from '@/utils/Index'
 import { IMGUPURL, IMGURL } from '@/utils/api_evn'
 import Ellipsis from '@/components/Ellipsis'
 import Styles from './Index.less';
@@ -24,12 +24,13 @@ class StandardTable extends PureComponent {
       //列表图片预览
       previewImage = (url) => {
             console.info('url ===', url)
-            this.setState({ previewVisible: true, previewImageUrl: url})
+            this.setState({ previewVisible: true, previewImageUrl: url })
       }
 
       onCancelPreviewImage = () => {
-            this.setState({ previewVisible: false})
+            this.setState({ previewVisible: false })
       }
+
 
       render() {
             const { selectedRowKeys } = this.state;
@@ -56,55 +57,102 @@ class StandardTable extends PureComponent {
                   ...pagination,
             };
 
+            function orderStatus(status) {
+                  switch (status) {
+                        case 1:
+                              return (<Badge status="warning" text="未付款" />);
+                        case 2:
+                              return (<Badge status="processing" text="已付款等待发货" />);
+                        case 3:
+                              return (<Badge status="processing" text="已发货等待确认收货" />);
+                        case 4:
+                              return (<Badge status="success" text="已签收" />);
+                        case 5:
+                              return (<Badge status="processing" text="退货申请" />);
+                        case 6:
+                              return (<Badge status="processing" text="退货中" />);
+                        case 7:
+                              return (<Badge status="success" text="已退货" />);
+                        case 8:
+                              return (<Badge status="success" text="取消交易" />);
+                        default:
+                              return (<Badge status="success" text="未付款" />);
+                  }
+            }
+
+            function orderPayStatus(status) {
+                  switch (status) {
+                        case 1:
+                              return (<Badge status="warning" text="未付款" />);
+                        case 2:
+                              return (<Badge status="success" text="付款完成" />);
+                        case 3:
+                              return (<Badge status="success" text="待退款" />);
+                        case 4:
+                              return (<Badge status="processing" text="已退款" />);
+                        default:
+                              return (<Badge status="warning" text="未付款" />);
+                  }
+            }
+
             const columns = [
 
                   {
-                        title: '商品名称',
-                        dataIndex: 'goodsName',
+                        title: '订单编号',
+                        dataIndex: 'orderNo',
                         align: 'center',
                   },
                   {
-                        title: '商品图片',
-                        dataIndex: 'goodsDefaultImage',
+                        title: '订单状态',
+                        dataIndex: 'orderStatus',
                         align: 'center',
-                        render: (text) => text ? <a onClick={e => this.previewImage(text)}><img height={40} src={IMGURL + text} style={{ borderRadius: '5%' }} /></a> : <div style={{ height: '40px' }}></div>,
+                        render: (text) => orderStatus(text)
                   },
                   {
-                        title: '商品类型',
-                        dataIndex: 'goodsType',
+                        title: '支付状态',
+                        dataIndex: 'orderPayStatus',
                         align: 'center',
-                        render: (text) => {
-                              return text == 1 ? <Badge status="success" text="实体商品" /> : <Badge status="success" text="虚拟商品" />
-                        }
+                        render: (text) => orderPayStatus(text)
                   },
                   {
-                        title: '商品分类',
-                        dataIndex: 'categoryName',
+                        title: '订单总价',
+                        dataIndex: 'totalFee',
                         align: 'center',
                   },
                   {
-                        title: '商品品牌',
-                        dataIndex: 'brandName',
+                        title: '支付金额',
+                        dataIndex: 'payment',
                         align: 'center',
                   },
                   {
-                        title: '销售价',
-                        dataIndex: 'salePrice',
+                        title: '物流费用',
+                        dataIndex: 'postFee',
                         align: 'center',
                   },
                   {
-                        title: '市场价',
-                        dataIndex: 'marketPrice',
+                        title: '收件人',
+                        dataIndex: 'receiverName',
                         align: 'center',
                   },
                   {
-                        title: '成本价',
-                        dataIndex: 'costPrice',
+                        title: '收件人联系电话',
+                        dataIndex: 'receiverPhone',
                         align: 'center',
                   },
                   {
-                        title: '商品库存',
-                        dataIndex: 'stockNum',
+                        title: '收件人联系手机',
+                        dataIndex: 'receiverMobile',
+                        align: 'center',
+                  },
+                  {
+                        title: '收件区域',
+                        dataIndex: 'receiverRegion',
+                        align: 'center',
+                        render: (text) => <span>{isJSON(text) ? JSON.parse(text).label : ''}</span>,
+                  },
+                  {
+                        title: '收件地址',
+                        dataIndex: 'receiverAddress',
                         align: 'center',
                   },
                   {
@@ -114,30 +162,8 @@ class StandardTable extends PureComponent {
                         render: val => <Ellipsis length={10} tooltip >{val}</Ellipsis>,
                   },
                   {
-                        title: '商品关键词',
-                        dataIndex: 'goodsKeyword',
-                        align: 'center',
-                        render: val => <Ellipsis length={10} tooltip >{val}</Ellipsis>,
-                  },
-                  {
-                        title: '商品简介',
-                        dataIndex: 'goodsBrief',
-                        align: 'center',
-                        render: val => <Ellipsis length={10} tooltip >{val}</Ellipsis>,
-                  },
-                  {
-                        title: '商品编码',
-                        dataIndex: 'goodsCode',
-                        align: 'center',
-                  },
-                  {
-                        title: '商品条码',
-                        dataIndex: 'barCode',
-                        align: 'center',
-                  },
-                  {
-                        title: '状态',
-                        dataIndex: 'isActive',
+                        title: '是否需要发票',
+                        dataIndex: 'needInvoice',
                         render: (text) => <span>{text
                               ? <Badge status="success" text="已启用" />
                               : <Badge status="warning" text="已禁用" />}</span>,
